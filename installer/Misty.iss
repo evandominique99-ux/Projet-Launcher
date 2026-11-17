@@ -29,7 +29,7 @@
 [Setup]
 ; Ne jamais changer cet ID : c'est lui qui relie les versions entre elles (et update.rs : CLE_DESINSTALLATION)
 AppId={{8F4C2A61-3B7E-4D19-9A55-6C1E0F2B7D43}
-AppName=Mistly Launcher
+AppName=Projet
 AppVersion={#Version}
 AppVerName=Mistly Launcher {#Version}
 AppPublisher=xTheoxreborn
@@ -45,7 +45,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0
 OutputDir={#Sortie}
-OutputBaseFilename=Misty-Setup-{#Version}
+OutputBaseFilename=Projet-Setup-{#Version}
 SetupIconFile=..\misty-rust\assets\icone.ico
 UninstallDisplayIcon={app}\{#Dossier}\Misty.exe
 UninstallDisplayName=Mistly
