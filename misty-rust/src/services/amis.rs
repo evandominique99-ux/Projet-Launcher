@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 use std::path::PathBuf;
 
-const API: &str = "https://misty-launcher.online/api/client";
+const API: &str = "https://projet.invalid/api/client";
 /// Le site n'accepte pas plus de joueurs par demande (comme Misty Client).
 const LOT: usize = 100;
 /// Un skin d'ami est retéléchargé au plus une fois par jour.

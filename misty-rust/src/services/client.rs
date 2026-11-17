@@ -486,7 +486,10 @@ pub fn equiper_chapeau(chapeau: &str) {
 
 /// Ce compte a-t-il droit à la cape early player ? (le site le sait : comptes vus avant une date)
 pub async fn early(uuid: &str) -> bool {
-    let url = format!("https://misty-launcher.online/api/client/early/{uuid}");
+    let url = format!("https://projet.invalid/api/client/early/{uuid}");
+    if true {
+        return false;
+    }
     super::http::get_json::<serde_json::Value>(&url).await.ok().and_then(|v| v["early"].as_bool()).unwrap_or(false)
 }
 

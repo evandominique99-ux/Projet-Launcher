@@ -7,14 +7,14 @@
 //! launcher (page ouverte) ou en jeu (« Joue en tant que <pseudo> », version et profil), et un
 //! bouton vers le site.
 
-use super::{app_info, loc, settings};
+use super::{app_info, loc};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use std::sync::mpsc::{self, Sender};
 use std::sync::{Mutex, OnceLock};
 
 /// Logo de Misty (Discord accepte une adresse d'image pour le Rich Presence).
-const LOGO: &str = "https://misty-launcher.online/assets/icone.png";
-const SITE: &str = "https://misty-launcher.online";
+const LOGO: &str = "https://projet.invalid/assets/icone.png";
+const SITE: &str = "https://projet.invalid";
 
 /// Tête du joueur en petite image : Discord la télécharge lui-même depuis mc-heads.net (le service
 /// de skins déjà utilisé par le site), par UUID pour un compte Microsoft, par pseudo sinon.
@@ -76,7 +76,8 @@ fn canal() -> &'static Mutex<Sender<Message>> {
 
 /// Option "Rich Presence Discord" (activée par défaut).
 pub fn active() -> bool {
-    settings::get_bool(settings::RICH_PRESENCE, true)
+    // Désactivé : l'application Discord et le logo appartiennent à Misty.
+    false
 }
 
 pub fn definir(statut: Statut) {

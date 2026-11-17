@@ -15,7 +15,7 @@ use serde_json::{json, Value};
 use std::sync::OnceLock;
 use std::time::Duration;
 
-const SITE: &str = "https://misty-launcher.online";
+const SITE: &str = "https://projet.invalid";
 
 static RUNTIME: OnceLock<tokio::runtime::Handle> = OnceLock::new();
 
@@ -30,7 +30,8 @@ pub fn demandee() -> bool {
 }
 
 pub fn active() -> bool {
-    settings::get_bool(settings::TELEMETRIE, false)
+    // Désactivée : aucune donnée n'est envoyée aux serveurs de Misty.
+    false
 }
 
 pub fn activer(oui: bool) {

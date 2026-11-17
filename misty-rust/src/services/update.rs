@@ -14,7 +14,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 /// Site de Misty : copie de la dernière version (voir Misty-Web, `miroir`).
-const SITE: &str = "https://misty-launcher.online";
+// Pas de site de secours pour Projet (adresse volontairement injoignable).
+const SITE: &str = "https://projet.invalid";
 
 pub struct ReleaseInfo {
     pub version: String,
@@ -52,6 +53,8 @@ pub async fn verifier() -> anyhow::Result<Option<ReleaseInfo>> {
 }
 
 async fn verifier_site() -> anyhow::Result<Option<ReleaseInfo>> {
+    anyhow::bail!("pas de site de mise à jour");
+    #[allow(unreachable_code)]
     let doc: serde_json::Value = http::get_json(&format!("{SITE}/api/latest")).await?;
     let version = doc["version"].as_str().unwrap_or("").trim_start_matches('v').to_string();
     if version.is_empty() {
@@ -103,7 +106,7 @@ async fn verifier_github() -> anyhow::Result<Option<ReleaseInfo>> {
     }
     // sans zip sur GitHub (pas encore envoyé), le site peut quand même l'avoir
     // (le site ne garde que la dernière version stable : pas de secours pour une pré-release)
-    let sources = if prerelease { url.into_iter().collect() } else { url.into_iter().chain([url_site()]).collect() };
+    let sources: Vec<String> = url.into_iter().collect();
     Ok(Some(ReleaseInfo { version, prerelease, sources, taille }))
 }
 
