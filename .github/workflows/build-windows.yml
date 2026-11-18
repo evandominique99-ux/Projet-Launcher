@@ -1,0 +1,39 @@
+name: Build Windows
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: misty-rust
+
+      - name: Build (exe + zip portable)
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File installer\build.ps1 -SansInstallateur
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Projet-Windows
+          path: publish/*.zip
+
+      - name: Attach to release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: publish/*.zip
